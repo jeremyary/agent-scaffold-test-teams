@@ -19,7 +19,6 @@ When the user's request matches keywords below, route to the corresponding agent
 | "performance", "slow", "profiling", "optimize", "latency" | Performance Engineer | — |
 | "deploy", "CI/CD", "Docker", "Kubernetes", "Terraform" | DevOps Engineer | — |
 | "epic", "story", "sprint", "Jira", "backlog", "work breakdown", "estimate" | Project Manager | — |
-| "SLO", "SLI", "runbook", "incident", "on-call", "error budget", "capacity" | SRE Engineer | DevOps Engineer |
 | "bug", "error", "crash", "debug", "broken", "not working" | Debug Specialist | — |
 | "docs", "README", "changelog", "documentation" | Technical Writer | — |
 | "requirements", "user story", "acceptance criteria" | Requirements Analyst | Product Manager |
@@ -44,7 +43,6 @@ Mode is determined by the agent's tool set: agents without Write/Edit tools are 
 | Performance Engineer | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash | — |
 | DevOps Engineer | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash | — |
 | Project Manager | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash, WebSearch | project |
-| SRE Engineer | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash | project |
 | Debug Specialist | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash | — |
 | Technical Writer | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash, WebSearch | project |
 | Requirements Analyst | sonnet | acceptEdits | Read, Write, Edit, Glob, Grep, Bash, WebSearch, AskUserQuestion | project |
@@ -104,7 +102,7 @@ Opus is reserved for decisions and reviews with high blast radius: product direc
 
 ## Agent Memory (`memory: project`)
 
-Nine agents have `memory: project` enabled: Product Manager, Architect, Tech Lead, Code Reviewer, Security Engineer, Project Manager, SRE Engineer, Technical Writer, and Requirements Analyst. This means they retain context across sessions for the current project.
+Eight agents have `memory: project` enabled: Product Manager, Architect, Tech Lead, Code Reviewer, Security Engineer, Project Manager, Technical Writer, and Requirements Analyst. This means they retain context across sessions for the current project.
 
 **What agents should remember:**
 
@@ -115,7 +113,6 @@ Nine agents have `memory: project` enabled: Product Manager, Architect, Tech Lea
 - Recurring code quality patterns — both positive and negative (Code Reviewer)
 - Known vulnerabilities, accepted risks, and security exceptions (Security Engineer)
 - Estimation accuracy, velocity patterns, and dependency structures (Project Manager)
-- SLO targets, incident history, capacity baselines, and operational patterns (SRE Engineer)
 - Project terminology, documentation structure, and style preferences (Technical Writer)
 - Stakeholder preferences, domain rules, and requirements history (Requirements Analyst)
 

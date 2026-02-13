@@ -1,81 +1,69 @@
-# Project Name
+# Mortgage Loan Processing System
 
-<!-- SETUP REQUIRED: If you see placeholder values below (HTML comments with examples, -->
-<!-- unfilled tables), run the /setup skill to configure this project. Placeholder text -->
-<!-- wastes context tokens in every agent session until filled in or removed. -->
-
-<!-- Replace with your project name and a one-line description -->
-> **One-line description of what this project does and who it serves.**
+> **AI-powered multi-agent mortgage loan processing system — a Red Hat AI Quickstart reference implementation demonstrating supervisor-worker orchestration, human-in-the-loop workflows, and compliance-first design for regulated industries.**
 
 ## Project Context
 
-<!-- Fill in these values when starting a new project. Every agent reads this file. -->
-
 | Attribute | Value |
 |-----------|-------|
-| Maturity | `proof-of-concept` / `mvp` / `production` |
-| Domain | <!-- e.g., fintech, healthcare, developer tooling, internal ops --> |
-| Primary Users | <!-- e.g., internal developers, end customers, ops team --> |
-| Compliance | <!-- e.g., none, SOC 2, HIPAA, PCI-DSS, FedRAMP --> |
+| Maturity | `mvp` |
+| Domain | Fintech — mortgage lending (regulated) |
+| Primary Users | AI developers/solutions architects, loan officers, compliance officers |
+| Compliance | Fair lending (ECOA, Fair Housing Act) — demonstrated patterns, not certified. Red Hat internal AI compliance. |
 
 ### Maturity Expectations
 
-<!-- Delete the rows that don't apply and keep only your maturity level -->
-
 **Important:** Maturity level governs **implementation quality** — test coverage, error handling depth, documentation thoroughness, infrastructure complexity. It does **not** govern **workflow phases**. A PoC still follows the full plan-review-build-verify sequence when SDD criteria are met (see `workflow-patterns` skill). The artifacts may be lighter, but they are not skipped.
 
-| Concern | Proof-of-Concept | MVP | Production |
-|---------|-------------------|-----|------------|
-| Testing | Smoke tests only | Happy path + critical edges | Full coverage targets (80%+) |
-| Error handling | Console output is fine | Basic error responses | Structured errors, monitoring, alerting |
-| Security | Don't store real secrets | Auth + input validation | Full OWASP audit, dependency scanning, threat model |
-| Documentation | README with setup steps | README + API basics | Full docs suite, ADRs, runbooks |
-| Performance | Ignore unless broken | Profile obvious bottlenecks | Load testing, SLOs, optimization |
-| Code review | Optional | Light review | Full review + security audit gate |
-| Infrastructure | Local dev only | Basic CI + single deploy target | Full CI/CD, staging, monitoring, IaC |
+| Concern | MVP |
+|---------|-----|
+| Testing | Happy path + critical edges |
+| Error handling | Basic error responses |
+| Security | Auth + input validation |
+| Documentation | README + API basics |
+| Performance | Profile obvious bottlenecks |
+| Code review | Light review |
+| Infrastructure | Basic CI + single deploy target |
 
 ## Goals
 
-<!-- What is this project trying to achieve? Be specific. -->
-
-1. <!-- Primary goal -->
-2. <!-- Secondary goal -->
-3. <!-- Tertiary goal -->
+1. Demonstrate multi-agent AI patterns (supervisor-worker orchestration, confidence-based escalation, human-in-the-loop) in a regulated industry context
+2. Provide a compelling, runnable developer quickstart for the Red Hat AI Quickstart template that showcases real value with mocked external services
+3. Maintain complete, immutable audit trails with explainable AI reasoning for every agent decision
+4. Show compliance-first design patterns (fair lending, adverse action notices, fraud detection) that translate to production regulated systems
 
 ## Non-Goals
 
-<!-- What this project explicitly does NOT do. Helps agents avoid scope creep. -->
-
-- <!-- e.g., "Does not handle payment processing — uses Stripe" -->
-- <!-- e.g., "No mobile app — web only for now" -->
-- <!-- e.g., "Not building a custom auth system — using Auth0" -->
+- Not a production-certified loan origination system — demonstrates patterns, not regulatory certification
+- No end-user authentication (registration, password management, OAuth) — uses API key auth
+- No real credit bureau integration — mocked with synthetic data
+- No payment processing — application lifecycle ends at approval/denial
+- No mobile application — web only (desktop/tablet)
+- No multi-tenancy
+- No custom ML model training or fine-tuning — uses off-the-shelf LLMs via API
+- No real-time collaboration (UI polls for updates, no WebSockets for app status)
+- No internationalization — English only, US mortgage regulations only
+- No high-availability deployment — basic deployment for demo/dev
 
 ## Constraints
 
-<!-- Technical, business, or organizational constraints agents should respect. -->
-
-- <!-- e.g., "Must integrate with existing PostgreSQL 14 database" -->
-- <!-- e.g., "All services must run in AWS us-east-1" -->
-- <!-- e.g., "Budget: no paid services beyond hosting during PoC" -->
-- <!-- e.g., "Must support IE11" or "Modern browsers only (last 2 versions)" -->
+- Must build on the Red Hat AI Quickstart template (Turborepo monorepo with React 19, FastAPI, PostgreSQL, Helm charts)
+- OpenShift for deployment, Podman for containers, Helm for orchestration
+- Agent orchestration must use LangGraph with persistent checkpointing (PostgresSaver)
+- Hybrid LLM strategy: Claude for reasoning, GPT-4 Vision for document analysis, optional LlamaStack for local/data-residency
+- PostgreSQL + pgvector for both application data and RAG embeddings (no separate vector DB)
+- Self-contained quickstart: `make setup && make dev` must get to a working system
+- Every agent decision, human action, and workflow transition must produce an immutable audit record
 
 ## Stakeholder Preferences
 
-<!-- Record stakeholder decision patterns and preferences so agents can anticipate rather than re-ask. -->
-<!-- These accumulate over time as agents learn from interactions. -->
-
 | Preference Area | Observed Pattern |
 |-----------------|-----------------|
-| Review thoroughness | <!-- e.g., "Prefers detailed reviews with specific line references" --> |
-| Risk tolerance | <!-- e.g., "Conservative — prefers proven patterns over cutting-edge" --> |
-| Scope decisions | <!-- e.g., "Tends to defer nice-to-haves to Phase 2" --> |
-| Communication style | <!-- e.g., "Prefers concise summaries with options, not lengthy analysis" --> |
-| Technology biases | <!-- e.g., "Strongly prefers Python over Node.js for backend services" --> |
-| Testing expectations | <!-- e.g., "Expects integration tests for every API endpoint, not just unit tests" --> |
-| Documentation level | <!-- e.g., "Wants ADRs for every significant decision, even in PoC" --> |
-
-<!-- Add rows as patterns emerge. Agents with project memory should update this section -->
-<!-- when they observe consistent preferences across multiple interactions. -->
+| Security posture | Upgrade, don't defer. Real API key auth from day one, image redaction before LLMs, separate DB roles from Phase 1, global rate limits before public access. |
+| Feature richness | Prefers impressive over minimal. Include fraud detection + denial coaching agents, PDF metadata examination, sentiment analysis. More agents and richer demos preferred. |
+| Scope decisions | Prefers industry-standard approaches over simpler custom alternatives. Three roles (not two), cross-session context for authenticated users, expanded FRED data series. |
+| Risk tolerance | Conservative on security, ambitious on features. All agent conflicts escalate to human review — no automated tie-breaking. |
+| Communication style | Concise and direct. |
 
 ## Red Hat AI Compliance
 
@@ -92,17 +80,20 @@ See `docs/ai-compliance-checklist.md` for the developer quick-reference checklis
 
 ## Key Decisions
 
-<!-- Record major technology choices here so all agents stay aligned. -->
-<!-- Move detailed trade-off analysis to plans/adr/ as the project matures. -->
-
-- **Language:** <!-- e.g., TypeScript 5.x -->
-- **Runtime:** <!-- e.g., Node.js 22 LTS -->
-- **Backend:** <!-- e.g., Fastify 5 -->
-- **Frontend:** <!-- e.g., React 19 + Vite -->
-- **Database:** <!-- e.g., PostgreSQL 16 -->
-- **ORM:** <!-- e.g., Drizzle -->
-- **Testing:** <!-- e.g., Vitest + Playwright -->
-- **Package Manager:** <!-- e.g., pnpm -->
+- **Languages:** TypeScript 5.x (frontend), Python 3.11+ (backend)
+- **Runtime:** Node.js (frontend), Python async (backend)
+- **Backend:** FastAPI (async)
+- **Frontend:** React 19 + Vite + TanStack Router + TanStack Query + Tailwind CSS + shadcn/ui
+- **Database:** PostgreSQL + pgvector + SQLAlchemy 2.0 async + Alembic
+- **Caching:** Redis
+- **Object Storage:** MinIO (S3-compatible)
+- **Agent Orchestration:** LangGraph + LangChain with PostgresSaver checkpointing
+- **LLM Observability:** LangFuse
+- **Testing:** Vitest + React Testing Library (UI), Pytest (API/DB)
+- **Package Managers:** pnpm (Node), uv (Python)
+- **Build System:** Turborepo
+- **Containers:** Podman
+- **Deployment:** Helm charts on OpenShift
 
 ---
 
@@ -129,7 +120,6 @@ This project uses a multi-agent system with specialized Claude Code agents. The 
 | Audit security | **Security Engineer** | `@security-engineer` |
 | Optimize performance | **Performance Engineer** | `@performance-engineer` |
 | Set up CI/CD or infra | **DevOps Engineer** | `@devops-engineer` |
-| Define SLOs & incident response | **SRE Engineer** | `@sre-engineer` |
 | Debug a problem | **Debug Specialist** | `@debug-specialist` |
 | Write documentation | **Technical Writer** | `@technical-writer` |
 
@@ -154,6 +144,7 @@ This project uses a multi-agent system with specialized Claude Code agents. The 
 @.claude/rules/agent-workflow.md
 @.claude/rules/review-governance.md
 @.claude/rules/architecture.md
+@.claude/rules/domain.md
 
 ## Project Commands
 
