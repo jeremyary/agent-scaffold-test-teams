@@ -14,16 +14,20 @@ Customize the sections below to match your project. All agents reference these c
 | Layer | Technology | Version |
 |-------|-----------|---------|
 | Backend Language | Python | 3.11+ |
-| Backend Framework | FastAPI | — |
+| Backend Framework | FastAPI (async) | — |
 | Frontend Language | TypeScript | 5.x |
 | Frontend Framework | React | 19.x |
 | Frontend Build | Vite | 6.x |
 | Frontend Routing | TanStack Router | — |
 | Frontend State | TanStack Query | — |
 | Frontend Styling | Tailwind CSS + shadcn/ui | — |
-| Database | PostgreSQL | — |
+| Database | PostgreSQL + pgvector | — |
 | ORM | SQLAlchemy 2.0 (async) | — |
 | Migrations | Alembic | — |
+| Caching | Redis | — |
+| Object Storage | MinIO (S3-compatible) | — |
+| Agent Orchestration | LangGraph + LangChain | — |
+| LLM Observability | LangFuse | — |
 | Backend Testing | pytest | — |
 | Frontend Testing | Vitest + React Testing Library | — |
 | E2E Testing | Playwright | — |
@@ -31,8 +35,8 @@ Customize the sections below to match your project. All agents reference these c
 | Frontend Package Manager | pnpm | — |
 | Build System | Turborepo | — |
 | CI/CD | GitHub Actions | — |
-| Container | Podman / Docker | — |
-| Cloud | OpenShift / Kubernetes | — |
+| Container | Podman | — |
+| Deployment | Helm on OpenShift | — |
 
 ## Project Structure
 
@@ -50,8 +54,7 @@ project/
 ├── plans/                    # SDD planning artifacts (product plan, architecture, requirements)
 │   └── reviews/              # Agent review documents
 ├── docs/
-│   ├── api/                  # API documentation
-│   └── sre/                  # SLOs, runbooks, incident reviews
+│   └── api/                  # API documentation
 ├── compose.yml               # Local development with containers
 ├── turbo.json                # Turborepo pipeline configuration
 └── Makefile                  # Common development commands
